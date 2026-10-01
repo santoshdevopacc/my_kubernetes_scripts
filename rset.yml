@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1         
+kind: ReplicaSet
+metadata:
+  name: uberparcel-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: uberparcels
+  template:
+    metadata:
+      labels:
+        app: uberparcels
+    spec:                   
+     containers:           
+        - name: container1
+          image: santoshdevopacc/my_docker_repo:uberparcel
+          ports:
+            - containerPort: 80
+...
+

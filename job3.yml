@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob1
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: nginx
+              name: container3
+              command: ["/bin/bash", "-c", "sudo apt update -y; sleep 20"]
+          restartPolicy: Never

@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ed-vol
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: container1
+          image: nginx
+          volumeMounts:
+            - name: podvolume
+              mountPath: "/usr/share/nginx/html"
+        - name: container2
+          image: busybox
+          command: ["/bin/sh", "-c", "while true; do echo 'Hello from container2' >> /tmp/myvol/index.html; sleep 5; done"]
+          volumeMounts:
+            - name: podvolume
+              mountPath: "/tmp/myvol"
+      volumes:
+        - name: podvolume
+          hostPath:
+            path: "/tmp/nodevolume"

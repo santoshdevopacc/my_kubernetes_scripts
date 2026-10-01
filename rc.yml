@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: uber-rc
+spec:
+  replicas: 3
+  selector:
+    app: ubercars
+  template:
+    metadata:
+      labels:
+        app: ubercars
+    spec:
+      containers:
+        - name: container1
+          image: santoshdevopacc/my_docker_repo:ubercars
+          ports:
+            - containerPort: 80
+...
